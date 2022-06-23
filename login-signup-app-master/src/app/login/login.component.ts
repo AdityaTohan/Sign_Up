@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      userName: ['', Validators.required],
       password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$')]]
     })
   }
@@ -32,10 +32,10 @@ get loginFormCtrl() {
 
   login() {
     this.apiService.login(this.loginForm.value).subscribe(response => {
-      alert(response)
+      alert(response.message)
       this.router.navigate(['dashboard'])
     }, (err) => {
-      alert(err)
+      alert(err.message)
     })
   }
 

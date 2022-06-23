@@ -6,13 +6,23 @@
 
     <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="loginForm" class="login-form">
 
-      <mat-form-field >
+      <!-- <mat-form-field >
         <mat-label>Email</mat-label>
         <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com"
                [ngClass]="{ 'is-invalid': loginFormCtrl.email.touched && loginFormCtrl.email.invalid }">
         <div class='invalid-feedback'>
           <div *ngIf='loginFormCtrl.email.errors?.required'>Required</div>
           <div *ngIf='loginFormCtrl.email.errors?.email'>Enter valid email address</div>
+        </div>
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field> -->
+
+      <mat-form-field >
+        <mat-label>User Name</mat-label>
+        <input matInput formControlName="userName" placeholder="User Name"
+               [ngClass]="{ 'is-invalid': loginFormCtrl.userName.touched && loginFormCtrl.userName.invalid }">
+        <div class='invalid-feedback'>
+          <div *ngIf='loginFormCtrl.userName.errors?.required'>Required</div>
         </div>
         <mat-icon matSuffix>person</mat-icon>
       </mat-form-field>
