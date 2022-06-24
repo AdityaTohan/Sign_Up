@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from "../services/api.service";
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,11 +32,17 @@ get loginFormCtrl() {
 }
 
   login() {
-    this.apiService.login(this.loginForm.value).subscribe(response => {
-      alert(response.message)
+    this.apiService.login(this.loginForm.value).subscribe(result => {
+      console.log(result.success)
+      console.log(result.message)
+      console.log(result.token)
+      if(result.success){
+        alert(result.message)
       this.router.navigate(['dashboard'])
+      }
+      
     }, (err) => {
-      alert(err.message)
+      alert(err)
     })
   }
 

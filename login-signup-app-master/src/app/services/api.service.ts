@@ -12,10 +12,10 @@ export class ApiService {
   ) { }
 
   signupApi(data: any): Observable<any> {
-    return this.httpClient.post('https://www.google.com/', data)
+    return this.httpClient.post('https://localhost:7149/api/Values/Register', data)
   }
 
   login(data: any): Observable<any> {
-    return this.httpClient.post('https://www.google.com/', data)
+    return this.httpClient.post('https://localhost:7149/api/Values/Login', data)
   }
 }
