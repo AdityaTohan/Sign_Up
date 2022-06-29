@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -22,6 +22,8 @@ import {RatingModule} from "primeng-lts/rating";
 import {MessagesModule} from 'primeng-lts/messages';
 import {MessageModule} from 'primeng-lts/message';
 import {MatDialogModule} from "@angular/material/dialog";
+import {ApiInterceptor} from "./api.interceptor"
+
 
 @NgModule({
   declarations: [
@@ -50,9 +52,14 @@ import {MatDialogModule} from "@angular/material/dialog";
     RatingModule,
     MessageModule,
     MessagesModule,
-    MatDialogModule
+    MatDialogModule,
+  
   ],
-  providers: [],
+  providers: [{
+    provide : HTTP_INTERCEPTORS,
+    useClass : ApiInterceptor,
+    multi : true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

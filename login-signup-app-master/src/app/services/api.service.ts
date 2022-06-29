@@ -18,4 +18,11 @@ export class ApiService {
   login(data: any): Observable<any> {
     return this.httpClient.post('https://localhost:7149/api/Values/Login', data)
   }
+
+  dashboard(): Observable<any>{
+    return this.httpClient.get('https://localhost:7149/api/token')
+  }
 }
+
+// Test API
+//https://jsonplaceholder.typicode.com/users

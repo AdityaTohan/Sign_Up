@@ -44,7 +44,7 @@ export class SignUpComponent implements OnInit{
     this.apiService.signupApi(this.signupForm.value).subscribe(response => {
       if(response) this.messageEnable = true
     }, (err) => {
-      this.messageEnable = true
+      this.messageEnable = false
     })
   }
 

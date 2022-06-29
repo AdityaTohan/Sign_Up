@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from "../services/api.service";
 import {Router} from "@angular/router";
+import { CookieService } from 'ngx-cookie-service'
 
 
 @Component({
@@ -17,8 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(
     public router: Router,
     private apiService: ApiService,
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -32,17 +34,19 @@ get loginFormCtrl() {
 }
 
   login() {
-    this.apiService.login(this.loginForm.value).subscribe(result => {
-      console.log(result.success)
-      console.log(result.message)
-      console.log(result.token)
-      if(result.success){
-        alert(result.message)
+    this.apiService.login(this.loginForm.value).subscribe(response => {
+      console.log(response.value.success)
+      console.log(response.value.message)
+      console.log(response.value.token)
+      this.cookieService.set('bearer_token', response.token,{expires:0.5})
+      alert(response.value.message)
+      if(response.value.success){ 
       this.router.navigate(['dashboard'])
       }
       
+      
     }, (err) => {
-      alert(err)
+      alert(err.value.message)
     })
   }
 
